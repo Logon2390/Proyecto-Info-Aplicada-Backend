@@ -140,3 +140,4 @@ C:\Users\Jeremy\Desktop\Trabajos II Semestre 2024\Info Aplicada\Proyecto Info Ap
 C:\Users\Jeremy\Desktop\Trabajos II Semestre 2024\Info Aplicada\Proyecto Info Aplicada\Backend\Backend\obj\Debug\net8.0\Backend.pdb
 C:\Users\Jeremy\Desktop\Trabajos II Semestre 2024\Info Aplicada\Proyecto Info Aplicada\Backend\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 C:\Users\Jeremy\Desktop\Trabajos II Semestre 2024\Info Aplicada\Proyecto Info Aplicada\Backend\Backend\obj\Debug\net8.0\ref\Backend.dll
+C:\Users\Jeremy\Desktop\Trabajos II Semestre 2024\Info Aplicada\Proyecto Info Aplicada\Backend\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

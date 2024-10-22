@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Backend.csproj": {}
+    "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\GITHUB_BACK\\Proyecto-Info-Aplicada-Backend\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Backend.csproj": {
+    "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\GITHUB_BACK\\Proyecto-Info-Aplicada-Backend\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Backend.csproj",
+        "projectUniqueName": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\GITHUB_BACK\\Proyecto-Info-Aplicada-Backend\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Backend.csproj",
+        "projectPath": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\GITHUB_BACK\\Proyecto-Info-Aplicada-Backend\\Backend\\Backend.csproj",
         "packagesPath": "C:\\Users\\Jeremy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\obj\\",
+        "outputPath": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\GITHUB_BACK\\Proyecto-Info-Aplicada-Backend\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jeremy\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,6 +46,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.10, )"

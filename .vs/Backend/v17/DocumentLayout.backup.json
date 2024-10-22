@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|c:\\users\\jeremy\\desktop\\trabajos ii semestre 2024\\info aplicada\\proyecto info aplicada\\backend\\backend\\controllers\\documentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\documentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|c:\\users\\jeremy\\desktop\\trabajos ii semestre 2024\\info aplicada\\proyecto info aplicada\\backend\\backend\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|solutionrelative:backend\\models\\document.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|c:\\users\\jeremy\\desktop\\trabajos ii semestre 2024\\info aplicada\\proyecto info aplicada\\backend\\backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{33C061C3-EA12-4721-ADAA-EB8B1CBA4DEF}|Backend\\Backend.csproj|solutionrelative:backend\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,15 +38,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "Document.cs",
+              "DocumentMoniker": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Models\\Document.cs",
+              "RelativeDocumentMoniker": "Backend\\Models\\Document.cs",
+              "ToolTip": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Models\\Document.cs",
+              "RelativeToolTip": "Backend\\Models\\Document.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T23:20:16.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Backend\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Backend\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABMAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T00:30:28.624Z",
+              "WhenOpened": "2024-10-22T23:02:51.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DocumentsController.cs",
+              "DocumentMoniker": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Controllers\\DocumentsController.cs",
+              "RelativeDocumentMoniker": "Backend\\Controllers\\DocumentsController.cs",
+              "ToolTip": "C:\\Users\\Jeremy\\Desktop\\Trabajos II Semestre 2024\\Info Aplicada\\Proyecto Info Aplicada\\Backend\\Backend\\Controllers\\DocumentsController.cs",
+              "RelativeToolTip": "Backend\\Controllers\\DocumentsController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwCcAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T23:02:47.554Z",
               "EditorCaption": ""
             }
           ]
