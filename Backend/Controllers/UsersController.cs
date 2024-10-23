@@ -48,6 +48,21 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
+        [Route("username")]
+        public async Task<IActionResult> CheckUsername(String username)
+        {
+            var userFound = await _context.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
+            if (userFound == null)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { isAvailable = true });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status200OK, new { isAvailable = false });
+            }
+        }
+
+        [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginDTO user)
         {
