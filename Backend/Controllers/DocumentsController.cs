@@ -18,12 +18,20 @@ namespace Backend.Controllers
             _context = context;
         }
 
+        [HttpPost]
+        [Route("userDocuments")]
+        public async Task<IActionResult> GetUserDocuments(string owner)
+        {
+            var documents = await _context.Documents.Where(d => d.owner == owner).ToListAsync();
+            return StatusCode(StatusCodes.Status200OK, new { value = documents });
+        }
+
         [HttpGet]
         [Route("getDocuments")]
         public async Task<IActionResult> GetDocuments()
         {
             var documents = await _context.Documents.ToListAsync();
-            return StatusCode(StatusCodes.Status200OK, new {value = documents});
+            return StatusCode(StatusCodes.Status200OK, new { value = documents });
         }
 
         [HttpPost]
@@ -51,5 +59,23 @@ namespace Backend.Controllers
                 return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
             }
         }
+
+
+        [HttpDelete]
+        [Route("deleteDocument")]
+        public async Task<IActionResult> DeleteDocument(int id)
+        {
+            var document = await _context.Documents.FindAsync(id);
+            if (document == null)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
+            }
+
+            _context.Documents.Remove(document);
+            await _context.SaveChangesAsync();
+
+            return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
+        }
+
     }
 }
