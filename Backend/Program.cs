@@ -4,12 +4,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddScoped<Backend.Custom.Utility>();
+
+// Registro de servicios personalizados
+builder.Services.AddScoped<DocumentService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
 
