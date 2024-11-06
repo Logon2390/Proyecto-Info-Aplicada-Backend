@@ -4,6 +4,7 @@ using Backend.Models.DTOs;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Backend.Custom;
 
 namespace Backend.Services
 {
@@ -11,9 +12,10 @@ namespace Backend.Services
     {
         private readonly BlockContext _context;
         private readonly Relation_User_Block_Context _relationContext;
-        public BlockServices(BlockContext context)
+        public BlockServices(BlockContext context, Relation_User_Block_Context relationContext)
         {
             _context = context;
+            _relationContext = relationContext;
         }
 
         // Obtiene todos los bloques de un usuario
@@ -39,8 +41,9 @@ namespace Backend.Services
         }
 
         // Agrega un nuevo bloque para un usuario en especifico y guarda su relación de id usuario e id bloque
-        public async Task<bool> AddBlockToUser(List<Document> documents, int ownerId)
+        public async Task<bool> AddBlockToUser(String documents, int ownerId)
         {
+
             var block = new Block
             {
                 FechaMinado = DateTime.UtcNow.ToString(),
@@ -91,6 +94,27 @@ namespace Backend.Services
             _relationContext.User_Block.Remove(relation);
             await _context.SaveChangesAsync();
             await _relationContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        // Minar un bloque y devolver un true si se minó correctamente
+        public async Task<bool> MineBlock(int id)
+        {
+            var block = await _context.Blocks.FindAsync(id);
+
+            // Si el bloque no existe
+            if (block == null)
+            {
+                return false;
+            }
+
+            // Minar el bloque
+            block = Miner.MineBlock(block);
+            await _context.SaveChangesAsync();
+
+            //Mostrar en consola el hash minado
+            Console.WriteLine(block.Hash);
 
             return true;
         }

@@ -2,7 +2,7 @@
 {
     public class BlockDTO
     {
-        public List<string> Documentos { get; set; }
+        public List<Document> Documentos { get; set; }
 
     }
 }

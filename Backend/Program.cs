@@ -15,6 +15,7 @@ builder.Services.AddScoped<Backend.Custom.Utility>();
 // Registro de servicios personalizados
 builder.Services.AddScoped<DocumentService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<BlockServices>();
 
 builder.Services.AddControllers();
 

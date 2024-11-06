@@ -10,7 +10,7 @@ public class Relation_User_Block_Context : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Relation_User_Block>().ToTable("User_Block");
-        modelBuilder.Entity<Relation_User_Block>().HasNoKey();
+        modelBuilder.Entity<Relation_User_Block>().HasKey(r => new { r.UserId, r.BlockId });  // Clave primaria compuesta
         base.OnModelCreating(modelBuilder);
     }
 }

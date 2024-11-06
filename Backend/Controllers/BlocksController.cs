@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Backend.Models;
 using Backend.Models.DTOs;
 using Backend.Services;
+using System.Text;
+using Backend.Custom;
 
 namespace Backend.Controllers
 {
@@ -23,11 +25,49 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("userDocuments")]
+        [Route("userBlocks")]
         public async Task<IActionResult> GetUserBlocks(int owner)
         {
-            var documents = await _blockService.GetBlocksbyOwner(owner);
-            return Ok(new { value = documents });
+            var blocks = await _blockService.GetBlocksbyOwner(owner);
+            return Ok(new { value = blocks });
+        }
+
+        [HttpGet]
+        [Route("findBlock")]
+        public async Task<IActionResult> GetBlock(int id)
+        {
+            var block = await _blockService.GetBlockById(id);
+            return Ok(new { value = block });
+        }
+
+        [HttpPost]
+        [Route("addBlock")]
+        public async Task<IActionResult> AddBlock(BlockDTO block, int ownerId)
+        {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < block.Documentos.Count; i += 3)
+            {
+                builder.Append(block.Documentos[i].base64 + "-");
+                if (i + 1 < block.Documentos.Count)
+                {
+                    builder.Append(block.Documentos[i + 1].base64 + "-");
+                }
+                if (i + 2 < block.Documentos.Count)
+                {
+                    builder.Append(block.Documentos[i + 2].base64 + "-");
+                }
+                await _blockService.AddBlockToUser(builder.ToString(), ownerId);
+                builder.Clear();
+            }
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("mineBlock")]
+        public async Task<IActionResult> MineBlock(int blockId)
+        {
+            await _blockService.MineBlock(blockId);
+            return Ok();
         }
     }
 }

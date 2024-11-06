@@ -11,7 +11,7 @@ namespace Backend.Custom
         {
         }
 
-        public string MineBlock(Block block)
+        public static Block MineBlock(Block block)
         {
             //Preparacion de datos
             String hash = "";
@@ -19,10 +19,7 @@ namespace Backend.Custom
             builder.Append(block.FechaMinado);
             builder.Append(block.Prueba);
             builder.Append(block.Milisegundos);
-            foreach (var doc in block.Documentos)
-            {
-                builder.Append(doc.base64);
-            }
+            builder.Append(block.Documentos);
 
             //Proceso de minado
             do
@@ -32,6 +29,7 @@ namespace Backend.Custom
                 // Verificar si el hash cumple con la dificultad
                 if (hash.StartsWith("0000"))
                 {
+                    block.Hash = hash;
                     break;
                 }
 
@@ -51,14 +49,11 @@ namespace Backend.Custom
                 builder.Append(block.FechaMinado);
                 builder.Append(block.Prueba);
                 builder.Append(block.Milisegundos);
-                foreach (var doc in block.Documentos)
-                {
-                    builder.Append(doc.base64);
-                }
+                builder.Append(block.Documentos);
 
             } while (true);
 
-            return hash;
+            return block;
         }
     }
 }
