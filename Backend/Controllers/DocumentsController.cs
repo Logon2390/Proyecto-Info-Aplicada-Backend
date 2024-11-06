@@ -4,78 +4,51 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using Backend.Services;
+
 namespace Backend.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize]
     [ApiController]
     public class DocumentsController : ControllerBase
     {
-        private readonly DocumentContext _context;
+        private readonly DocumentService _documentService;
 
-        public DocumentsController(DocumentContext context)
+        public DocumentsController(DocumentService documentService)
         {
-            _context = context;
+            _documentService = documentService;
         }
 
         [HttpPost]
         [Route("userDocuments")]
         public async Task<IActionResult> GetUserDocuments(string owner)
         {
-            var documents = await _context.Documents.Where(d => d.owner == owner).ToListAsync();
-            return StatusCode(StatusCodes.Status200OK, new { value = documents });
+            var documents = await _documentService.GetUserDocuments(owner);
+            return Ok(new { value = documents });
         }
 
         [HttpGet]
         [Route("getDocuments")]
         public async Task<IActionResult> GetDocuments()
         {
-            var documents = await _context.Documents.ToListAsync();
-            return StatusCode(StatusCodes.Status200OK, new { value = documents });
+            var documents = await _documentService.GetDocuments();
+            return Ok(new { value = documents });
         }
 
         [HttpPost]
         [Route("addDocument")]
         public async Task<IActionResult> AddDocument(DocumentDTO documentDTO)
         {
-            Document document = new Document
-            {
-                owner = documentDTO.owner,
-                type = documentDTO.type,
-                CreatedAt = documentDTO.CreatedAt,
-                size = documentDTO.size,
-                base64 = documentDTO.base64
-            };
-
-            object value = await _context.Documents.AddAsync(document);
-            await _context.SaveChangesAsync();
-
-            if (document.Id != 0)
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
-            }
+            var isSuccess = await _documentService.AddDocument(documentDTO);
+            return Ok(new { isSuccess });
         }
-
 
         [HttpDelete]
         [Route("deleteDocument")]
         public async Task<IActionResult> DeleteDocument(int id)
         {
-            var document = await _context.Documents.FindAsync(id);
-            if (document == null)
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
-            }
-
-            _context.Documents.Remove(document);
-            await _context.SaveChangesAsync();
-
-            return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
+            var isSuccess = await _documentService.DeleteDocument(id);
+            return Ok(new { isSuccess });
         }
-
     }
 }

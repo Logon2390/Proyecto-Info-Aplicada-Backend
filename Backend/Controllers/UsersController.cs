@@ -1,9 +1,8 @@
-﻿using Backend.Models;
-using Backend.Custom;
-using Backend.Models.DTOs;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Backend.Models.DTOs;
+using Backend.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -12,68 +11,37 @@ namespace Backend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UserContext _context;
-        private readonly Utility _utility;
+        private readonly UserService _userService;
 
-        public UsersController(UserContext context, Utility utility)
+        public UsersController(UserService userService)
         {
-            _context = context;
-            _utility = utility;
+            _userService = userService;
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(UsuarioDTO user)
+        public async Task<IActionResult> Register(UsuarioDTO userDto)
         {
-            var userModel = new User
-            {
-                Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                BirthDate = user.BirthDate,
-                Password = _utility.encryptSHA256(user.Password)
-            };
-
-            await _context.Users.AddAsync(userModel);
-            await _context.SaveChangesAsync();
-
-            if (userModel.Id != 0)
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true });
-            }
-            else {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false });
-            }
+            var isSuccess = await _userService.RegisterUser(userDto);
+            return Ok(new { isSuccess });
         }
 
         [HttpPost]
         [Route("username")]
-        public async Task<IActionResult> CheckUsername(String username)
+        public async Task<IActionResult> CheckUsername(string username)
         {
-            var userFound = await _context.Users.Where(u => u.Username == username).FirstOrDefaultAsync();
-            if (userFound == null)
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isAvailable = true });
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isAvailable = false });
-            }
+            var isAvailable = await _userService.IsUsernameAvailable(username);
+            return Ok(new { isAvailable });
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginDTO user)
+        public async Task<IActionResult> Login(LoginDTO userDto)
         {
-            var userFound = await _context.Users.Where(u => u.Username == user.Username && u.Password == _utility.encryptSHA256(user.Password)).FirstOrDefaultAsync();
-            if (userFound == null) {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = false, token = "" });
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status200OK, new { isSuccess = true, token = _utility.generateJWT(userFound) });
-            }
+            var (isSuccess, token) = await _userService.LoginUser(userDto);
+            return Ok(new { isSuccess, token });
         }
     }
 }
+
+
