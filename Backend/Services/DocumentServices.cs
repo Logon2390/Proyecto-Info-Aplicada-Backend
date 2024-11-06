@@ -50,6 +50,18 @@ namespace Backend.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> DeleteDocuments(int[] ids)
+        {
+            var documents = await _context.Documents.Where(d => ids.Contains(d.Id)).ToListAsync();
+            if (documents.Count == 0)
+            {
+                return false;
+            }
+
+            _context.Documents.RemoveRange(documents);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
 

@@ -50,5 +50,13 @@ namespace Backend.Controllers
             var isSuccess = await _documentService.DeleteDocument(id);
             return Ok(new { isSuccess });
         }
+
+        [HttpDelete]
+        [Route("deleteDocuments")]
+        public async Task<IActionResult> DeleteDocuments([FromBody] int[] ids)
+        {
+            var isSuccess = await _documentService.DeleteDocuments(ids);
+            return Ok(new { isSuccess });
+        }
     }
 }
