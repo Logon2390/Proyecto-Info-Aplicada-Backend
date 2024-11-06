@@ -26,7 +26,7 @@ namespace Backend.Services
                 LastName = userDto.LastName,
                 Email = userDto.Email,
                 BirthDate = userDto.BirthDate,
-                Password = _utility.encryptSHA256(userDto.Password)
+                Password = Utility.encryptSHA256(userDto.Password)
             };
 
             await _context.Users.AddAsync(user);
@@ -43,7 +43,7 @@ namespace Backend.Services
         public async Task<(bool isSuccess, string token)> LoginUser(LoginDTO userDto)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == userDto.Username && u.Password == _utility.encryptSHA256(userDto.Password));
+                .FirstOrDefaultAsync(u => u.Username == userDto.Username && u.Password == Utility.encryptSHA256(userDto.Password));
 
             if (user == null)
                 return (false, "");

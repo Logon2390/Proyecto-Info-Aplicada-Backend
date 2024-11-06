@@ -17,7 +17,7 @@ namespace Backend.Custom
         }
 
         //Metodo de encriptacion de texto
-        public string encryptSHA256(string text)
+        public static string encryptSHA256(string text)
         {
 
             using (SHA256 sha256Hash = SHA256.Create())
