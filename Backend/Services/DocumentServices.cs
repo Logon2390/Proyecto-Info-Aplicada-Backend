@@ -25,7 +25,7 @@ namespace Backend.Services
             return await _context.Documents.ToListAsync();
         }
 
-        public async Task<bool> AddDocument(DocumentDTO documentDTO)
+        public async Task<bool> AddDocument(DocumentDto documentDTO)
         {
             Document document = new Document
             {

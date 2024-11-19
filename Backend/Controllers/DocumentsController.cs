@@ -37,7 +37,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("addDocument")]
-        public async Task<IActionResult> AddDocument(DocumentDTO documentDTO)
+        public async Task<IActionResult> AddDocument(DocumentDto documentDTO)
         {
             var isSuccess = await _documentService.AddDocument(documentDTO);
             return Ok(new { isSuccess });

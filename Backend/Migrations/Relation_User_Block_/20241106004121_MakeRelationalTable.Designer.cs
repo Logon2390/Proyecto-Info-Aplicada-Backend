@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend.Migrations.Relation_User_Block_
 {
-    [DbContext(typeof(Relation_User_Block_Context))]
+    [DbContext(typeof(RelationUserBlockContext))]
     [Migration("20241106004121_MakeRelationalTable")]
     partial class MakeRelationalTable
     {

@@ -11,8 +11,8 @@ namespace Backend.Services
     public class BlockServices
     {
         private readonly BlockContext _context;
-        private readonly Relation_User_Block_Context _relationContext;
-        public BlockServices(BlockContext context, Relation_User_Block_Context relationContext)
+        private readonly RelationUserBlockContext _relationContext;
+        public BlockServices(BlockContext context, RelationUserBlockContext relationContext)
         {
             _context = context;
             _relationContext = relationContext;
@@ -28,14 +28,17 @@ namespace Backend.Services
                 if (relation.UserId == ownerId)
                 {
                     var block = await _context.Blocks.FindAsync(relation.BlockId);
-                    blocks.Add(block);
+                    if (block != null)
+                    {
+                        blocks.Add(block);
+                    }
                 }
             }
             return blocks;
         }
 
         // Obtiene un bloque específico por ID
-        public async Task<Block> GetBlockById(int id)
+        public async Task<Block?> GetBlockById(int id)
         {
             return await _context.Blocks.FindAsync(id);
         }
@@ -58,7 +61,7 @@ namespace Backend.Services
             _context.Blocks.Add(block);
             await _context.SaveChangesAsync();
 
-            var relation = new Relation_User_Block
+            var relation = new RelationUserBlock
             {
                 UserId = ownerId,
 

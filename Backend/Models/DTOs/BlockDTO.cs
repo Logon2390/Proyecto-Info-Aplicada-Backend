@@ -1,8 +1,8 @@
 ﻿namespace Backend.Models.DTOs
 {
-    public class BlockDTO
+    public class BlockDto
     {
-        public List<Document> Documentos { get; set; }
+        public required List<Document> Documentos { get; set; }
 
     }
 }
