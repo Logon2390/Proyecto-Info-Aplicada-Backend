@@ -17,7 +17,7 @@ namespace Backend.Services
             _utility = utility;
         }
 
-        public async Task<bool> RegisterUser(UsuarioDTO userDto)
+        public async Task<bool> RegisterUser(UsuarioDto userDto)
         {
             var user = new User
             {
@@ -40,7 +40,7 @@ namespace Backend.Services
             return user == null;
         }
 
-        public async Task<(bool isSuccess, string token)> LoginUser(LoginDTO userDto)
+        public async Task<(bool isSuccess, string token)> LoginUser(LoginDto userDto)
         {
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == userDto.Username && u.Password == Utility.encryptSHA256(userDto.Password));

@@ -20,7 +20,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(UsuarioDTO userDto)
+        public async Task<IActionResult> Register(UsuarioDto userDto)
         {
             var isSuccess = await _userService.RegisterUser(userDto);
             return Ok(new { isSuccess });
@@ -36,7 +36,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginDTO userDto)
+        public async Task<IActionResult> Login(LoginDto userDto)
         {
             var (isSuccess, token) = await _userService.LoginUser(userDto);
             return Ok(new { isSuccess, token });

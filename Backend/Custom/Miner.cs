@@ -5,7 +5,6 @@ namespace Backend.Custom
 {
     public class Miner
     {
-        private readonly Utility _utility;
 
         public Miner()
         {

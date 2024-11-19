@@ -34,7 +34,7 @@ builder.Services.AddDbContext<BlockContext>(o =>
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddDbContext<Relation_User_Block_Context>(o =>
+builder.Services.AddDbContext<RelationUserBlockContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });

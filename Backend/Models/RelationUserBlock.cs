@@ -1,6 +1,6 @@
 ﻿namespace Backend.Models
 {
-    public class Relation_User_Block
+    public class RelationUserBlock
     {
         public int UserId { get; set; }
         public int BlockId { get; set; }

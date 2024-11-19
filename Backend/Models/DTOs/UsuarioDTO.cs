@@ -1,6 +1,6 @@
 ﻿namespace Backend.Models.DTOs
 {
-    public class UsuarioDTO
+    public class UsuarioDto
     {
         public int Id { get; set; }
         public required string Username { get; set; }

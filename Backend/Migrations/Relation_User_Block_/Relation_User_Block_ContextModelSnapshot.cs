@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend.Migrations.Relation_User_Block_
 {
-    [DbContext(typeof(Relation_User_Block_Context))]
+    [DbContext(typeof(RelationUserBlockContext))]
     partial class Relation_User_Block_ContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

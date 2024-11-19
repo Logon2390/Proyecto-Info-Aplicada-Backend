@@ -11,12 +11,12 @@ namespace Backend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string FechaMinado { get; set; }
+        public required string FechaMinado { get; set; }
         public int Prueba { get; set; }
         public long Milisegundos { get; set; }
-        public String Documentos { get; set; }
-        public string HashPrevio { get; set; }
-        public string Hash { get; set; }
+        public required String Documentos { get; set; }
+        public required string HashPrevio { get; set; }
+        public required string Hash { get; set; }
     }
 }
 

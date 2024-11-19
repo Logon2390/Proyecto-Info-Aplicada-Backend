@@ -42,7 +42,7 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("addBlock")]
-        public async Task<IActionResult> AddBlock(BlockDTO block, int ownerId)
+        public async Task<IActionResult> AddBlock(BlockDto block, int ownerId)
         {
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < block.Documentos.Count; i += 3)
