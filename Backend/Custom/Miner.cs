@@ -6,7 +6,7 @@ namespace Backend.Custom
     public class Miner
     {
 
-        public Miner()
+        protected Miner()
         {
         }
 

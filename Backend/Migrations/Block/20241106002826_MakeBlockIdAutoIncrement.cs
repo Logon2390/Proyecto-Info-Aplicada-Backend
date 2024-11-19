@@ -16,7 +16,7 @@ namespace Backend.Migrations.Block
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            throw new System.NotImplementedException();
         }
     }
 }

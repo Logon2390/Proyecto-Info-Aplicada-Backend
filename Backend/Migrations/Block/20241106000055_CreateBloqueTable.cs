@@ -32,8 +32,6 @@ namespace Backend.Migrations.Block
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            // Este método está vacío porque se encarga de revertir los cambios realizados en la migración 'Up'.
-            // En este caso, simplemente elimina la tabla 'Blocks' creada en el método 'Up'.
             migrationBuilder.DropTable(
                 name: "Blocks");
         }
