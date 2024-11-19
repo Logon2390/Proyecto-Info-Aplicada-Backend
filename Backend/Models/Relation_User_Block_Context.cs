@@ -1,16 +1,19 @@
 ﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-public class Relation_User_Block_Context : DbContext
+namespace Backend.Models
 {
-    public Relation_User_Block_Context(DbContextOptions<Relation_User_Block_Context> options) : base(options) { }
-
-    public DbSet<Relation_User_Block> User_Block { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public class Relation_User_Block_Context : DbContext
     {
-        modelBuilder.Entity<Relation_User_Block>().ToTable("User_Block");
-        modelBuilder.Entity<Relation_User_Block>().HasKey(r => new { r.UserId, r.BlockId });  // Clave primaria compuesta
-        base.OnModelCreating(modelBuilder);
+        public Relation_User_Block_Context(DbContextOptions<Relation_User_Block_Context> options) : base(options) { }
+
+        public DbSet<Relation_User_Block> User_Block { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Relation_User_Block>().ToTable("User_Block");
+            modelBuilder.Entity<Relation_User_Block>().HasKey(r => new { r.UserId, r.BlockId });  // Clave primaria compuesta
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
