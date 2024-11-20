@@ -60,5 +60,13 @@ namespace Backend.Controllers
             var isSuccess = await _documentService.DeleteDocuments(ids);
             return Ok(new { isSuccess });
         }
+
+        [HttpGet]
+        [Route("getBase64")]
+        public async Task<IActionResult> GetBase64(int id)
+        {
+            var document = await _documentService.GetBase64(id);
+            return Ok(new { value = document });
+        }
     }
 }
