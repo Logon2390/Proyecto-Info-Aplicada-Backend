@@ -89,6 +89,11 @@ namespace Backend.Services
             _context.Documents.Update(document);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<Document?> GetDocument(int id)
+        {
+            return await _context.Documents.FindAsync(id);
+        }
     }
 }
 

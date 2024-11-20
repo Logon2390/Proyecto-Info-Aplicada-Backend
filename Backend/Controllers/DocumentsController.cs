@@ -68,5 +68,13 @@ namespace Backend.Controllers
             var document = await _documentService.GetBase64(id);
             return Ok(new { value = document });
         }
+
+        [HttpGet]
+        [Route("getDocument")]
+        public async Task<IActionResult> GetDocument(int id)
+        {
+            var document = await _documentService.GetDocument(id);
+            return Ok(new { value = document });
+        }
     }
 }
