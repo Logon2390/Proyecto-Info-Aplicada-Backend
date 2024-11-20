@@ -51,5 +51,11 @@ namespace Backend.Services
             var token = _utility.generateJWT(user);
             return (true, token);
         }
+
+        public async Task<int?> GetOwnerId(string owner)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == owner);
+            return user?.Id;
+        }
     }
 }

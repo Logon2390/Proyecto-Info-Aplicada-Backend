@@ -18,10 +18,12 @@ namespace Backend.Controllers
     public class BlocksController : ControllerBase
     {
         private readonly BlockServices _blockService;
+        private readonly DocumentService _documentService;
 
-        public BlocksController(BlockServices service)
+        public BlocksController(BlockServices service, DocumentService documentService)
         {
             _blockService = service;
+            _documentService = documentService;
         }
 
         [HttpPost]
@@ -41,32 +43,30 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("addBlock")]
-        public async Task<IActionResult> AddBlock(BlockDto block, int ownerId)
+        [Route("mineBlocks")]
+        public async Task<IActionResult> MineBlocks(String owner)
         {
+            //Primero se obtienen los documentos del usuario
+            var documents = await _documentService.GetUserDocuments(owner);
+            //Ahora se crean los bloques con los documentos
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < block.Documentos.Count; i += 3)
+            for (int i = 0; i < documents.Count; i += 3)
             {
-                builder.Append(block.Documentos[i].base64 + "-");
-                if (i + 1 < block.Documentos.Count)
+                builder.Append(documents[i].Id + "-");
+                await _documentService.UpdateSize(documents[i].Id);
+                if (i + 1 < documents.Count)
                 {
-                    builder.Append(block.Documentos[i + 1].base64 + "-");
+                    builder.Append(documents[i + 1].Id + "-");
+                    await _documentService.UpdateSize(documents[i+1].Id);
                 }
-                if (i + 2 < block.Documentos.Count)
+                if (i + 2 < documents.Count)
                 {
-                    builder.Append(block.Documentos[i + 2].base64 + "-");
+                    builder.Append(documents[i + 2].Id + "-");
+                    await _documentService.UpdateSize(documents[i+2].Id);
                 }
-                await _blockService.AddBlockToUser(builder.ToString(), ownerId);
+                await _blockService.AddBlockToUser(builder.ToString(), owner);
                 builder.Clear();
             }
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("mineBlock")]
-        public async Task<IActionResult> MineBlock(int blockId)
-        {
-            await _blockService.MineBlock(blockId);
             return Ok();
         }
     }

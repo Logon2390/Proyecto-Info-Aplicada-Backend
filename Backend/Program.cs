@@ -38,6 +38,10 @@ builder.Services.AddDbContext<RelationUserBlockContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddDbContext<RelationDocumentBase64Context>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 
 
