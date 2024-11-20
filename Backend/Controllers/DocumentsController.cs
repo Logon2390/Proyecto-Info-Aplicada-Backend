@@ -17,6 +17,7 @@ namespace Backend.Controllers
         public DocumentsController(DocumentService documentService)
         {
             _documentService = documentService;
+
         }
 
         [HttpPost]
@@ -37,9 +38,10 @@ namespace Backend.Controllers
 
         [HttpPost]
         [Route("addDocument")]
-        public async Task<IActionResult> AddDocument(DocumentDTO documentDTO)
+        public async Task<IActionResult> AddDocument(DocumentDto documentDTO)
         {
             var isSuccess = await _documentService.AddDocument(documentDTO);
+
             return Ok(new { isSuccess });
         }
 
@@ -49,6 +51,22 @@ namespace Backend.Controllers
         {
             var isSuccess = await _documentService.DeleteDocument(id);
             return Ok(new { isSuccess });
+        }
+
+        [HttpDelete]
+        [Route("deleteDocuments")]
+        public async Task<IActionResult> DeleteDocuments([FromBody] int[] ids)
+        {
+            var isSuccess = await _documentService.DeleteDocuments(ids);
+            return Ok(new { isSuccess });
+        }
+
+        [HttpGet]
+        [Route("getBase64")]
+        public async Task<IActionResult> GetBase64(int id)
+        {
+            var document = await _documentService.GetBase64(id);
+            return Ok(new { value = document });
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Backend.Services
             _utility = utility;
         }
 
-        public async Task<bool> RegisterUser(UsuarioDTO userDto)
+        public async Task<bool> RegisterUser(UsuarioDto userDto)
         {
             var user = new User
             {
@@ -26,7 +26,7 @@ namespace Backend.Services
                 LastName = userDto.LastName,
                 Email = userDto.Email,
                 BirthDate = userDto.BirthDate,
-                Password = _utility.encryptSHA256(userDto.Password)
+                Password = Utility.encryptSHA256(userDto.Password)
             };
 
             await _context.Users.AddAsync(user);
@@ -40,16 +40,22 @@ namespace Backend.Services
             return user == null;
         }
 
-        public async Task<(bool isSuccess, string token)> LoginUser(LoginDTO userDto)
+        public async Task<(bool isSuccess, string token)> LoginUser(LoginDto userDto)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == userDto.Username && u.Password == _utility.encryptSHA256(userDto.Password));
+                .FirstOrDefaultAsync(u => u.Username == userDto.Username && u.Password == Utility.encryptSHA256(userDto.Password));
 
             if (user == null)
                 return (false, "");
 
             var token = _utility.generateJWT(user);
             return (true, token);
+        }
+
+        public async Task<int?> GetOwnerId(string owner)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == owner);
+            return user?.Id;
         }
     }
 }
