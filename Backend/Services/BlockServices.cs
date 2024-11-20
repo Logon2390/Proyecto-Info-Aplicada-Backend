@@ -8,10 +8,12 @@ namespace Backend.Services
     {
         private readonly BlockContext _context;
         private readonly RelationUserBlockContext _relationContext;
-        public BlockServices(BlockContext context, RelationUserBlockContext relationContext)
+        private readonly UserService _userService;
+        public BlockServices(BlockContext context, RelationUserBlockContext relationContext, UserService userService)
         {
             _context = context;
             _relationContext = relationContext;
+            _userService = userService;
         }
 
         // Obtiene todos los bloques de un usuario
@@ -40,8 +42,9 @@ namespace Backend.Services
         }
 
         // Agrega un nuevo bloque para un usuario en especifico y guarda su relación de id usuario e id bloque
-        public async Task<bool> AddBlockToUser(String documents, int ownerId)
+        public async Task<bool> AddBlockToUser(String documents, String owner)
         {
+            int ownerId = await _userService.GetOwnerId(owner) ?? 0;
 
             // Verifica si ya existen bloques para el ownerId
             var existingBlocks = await GetBlocksbyOwner(ownerId);
