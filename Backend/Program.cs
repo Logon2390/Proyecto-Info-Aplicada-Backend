@@ -16,6 +16,7 @@ builder.Services.AddScoped<Backend.Custom.Utility>();
 builder.Services.AddScoped<DocumentService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<BlockServices>();
+builder.Services.AddScoped<LogServices>();
 
 builder.Services.AddControllers();
 
@@ -39,6 +40,10 @@ builder.Services.AddDbContext<RelationUserBlockContext>(o =>
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddDbContext<RelationDocumentBase64Context>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+builder.Services.AddDbContext<LogContext>(o =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });

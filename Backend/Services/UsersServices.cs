@@ -2,7 +2,6 @@
 using Backend.Models;
 using Backend.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Backend.Services
 {

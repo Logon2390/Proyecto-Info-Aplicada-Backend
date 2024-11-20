@@ -10,6 +10,11 @@ namespace Backend.Custom
     public class Utility
     {
         private readonly IConfiguration _config;
+
+        public Utility()
+        {
+        }
+
         public Utility(IConfiguration config)
         {
             _config = config;
