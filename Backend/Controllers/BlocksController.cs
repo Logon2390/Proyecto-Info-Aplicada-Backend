@@ -19,11 +19,13 @@ namespace Backend.Controllers
     {
         private readonly BlockServices _blockService;
         private readonly DocumentService _documentService;
+        private readonly LogServices _logService;
 
-        public BlocksController(BlockServices service, DocumentService documentService)
+        public BlocksController(BlockServices service, DocumentService documentService, LogServices logServices)
         {
             _blockService = service;
             _documentService = documentService;
+            _logService = logServices;
         }
 
         [HttpPost]
@@ -65,8 +67,10 @@ namespace Backend.Controllers
                     await _documentService.UpdateSize(documents[i+2].Id);
                 }
                 await _blockService.AddBlockToUser(builder.ToString(), owner);
+                
                 builder.Clear();
             }
+            await _logService.SaveLog(owner, "Ha minado documentos");
             return Ok();
         }
     }

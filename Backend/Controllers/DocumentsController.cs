@@ -1,10 +1,6 @@
-﻿using Backend.Models;
-using Backend.Models.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
+﻿using Backend.Models.DTOs;
 using Backend.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
@@ -13,10 +9,12 @@ namespace Backend.Controllers
     public class DocumentsController : ControllerBase
     {
         private readonly DocumentService _documentService;
+        private readonly LogServices _logServices;
 
-        public DocumentsController(DocumentService documentService)
+        public DocumentsController(DocumentService documentService, LogServices logServices)
         {
             _documentService = documentService;
+            _logServices = logServices;
 
         }
 
@@ -27,7 +25,6 @@ namespace Backend.Controllers
             var documents = await _documentService.GetUserDocuments(owner);
             return Ok(new { value = documents });
         }
-
         [HttpGet]
         [Route("getDocuments")]
         public async Task<IActionResult> GetDocuments()
@@ -40,6 +37,7 @@ namespace Backend.Controllers
         [Route("addDocument")]
         public async Task<IActionResult> AddDocument(DocumentDto documentDTO)
         {
+            await _logServices.SaveLog(documentDTO.owner, "Ha agregado un documento");
             var isSuccess = await _documentService.AddDocument(documentDTO);
 
             return Ok(new { isSuccess });
@@ -49,6 +47,13 @@ namespace Backend.Controllers
         [Route("deleteDocument")]
         public async Task<IActionResult> DeleteDocument(int id)
         {
+            //obtener el documento
+            var document = await _documentService.GetDocument(id);
+            if (document == null)
+            {
+                return NotFound(new { message = "Documento no encontrado" });
+            }
+            await _logServices.SaveLog(document.owner, "Ha eliminado un documento");
             var isSuccess = await _documentService.DeleteDocument(id);
             return Ok(new { isSuccess });
         }
@@ -75,6 +80,14 @@ namespace Backend.Controllers
         {
             var document = await _documentService.GetDocument(id);
             return Ok(new { value = document });
+        }
+
+        [HttpGet]
+        [Route("getLogs")]
+        public async Task<IActionResult> GetLogs()
+        {
+            var logs = await _logServices.GetAllLogs();
+            return Ok(new { value = logs });
         }
     }
 }
