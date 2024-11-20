@@ -41,9 +41,10 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("addBlock")]
-        public async Task<IActionResult> AddBlock(BlockDto block, int ownerId)
+        [Route("mineBlocks")]
+        public async Task<IActionResult> MineBlocks(BlockDto block, int ownerId)
         {
+            //Primero se crean los bloques con los documentos
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < block.Documentos.Count; i += 3)
             {
@@ -59,14 +60,6 @@ namespace Backend.Controllers
                 await _blockService.AddBlockToUser(builder.ToString(), ownerId);
                 builder.Clear();
             }
-            return Ok();
-        }
-
-        [HttpPost]
-        [Route("mineBlock")]
-        public async Task<IActionResult> MineBlock(int blockId)
-        {
-            await _blockService.MineBlock(blockId);
             return Ok();
         }
     }

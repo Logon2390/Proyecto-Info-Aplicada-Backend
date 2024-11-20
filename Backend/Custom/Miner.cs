@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Backend.Services;
 using System.Text;
 
 namespace Backend.Custom
@@ -10,17 +11,18 @@ namespace Backend.Custom
         {
         }
 
-        public static Block MineBlock(Block block)
+        public static Block MineBlock(Block block, int ownerId, BlockServices blockServices)
         {
-            //Preparacion de datos
+            // Preparacion de datos
             String hash = "";
             StringBuilder builder = new StringBuilder();
             builder.Append(block.FechaMinado);
             builder.Append(block.Prueba);
             builder.Append(block.Milisegundos);
             builder.Append(block.Documentos);
+            builder.Append(block.HashPrevio);
 
-            //Proceso de minado
+            // Proceso de minado
             do
             {
                 hash = Utility.encryptSHA256(builder.ToString());
@@ -43,7 +45,7 @@ namespace Backend.Custom
 
                 block.Milisegundos++;
 
-                //Generar nuevo hash
+                // Generar nuevo hash
                 builder.Clear();
                 builder.Append(block.FechaMinado);
                 builder.Append(block.Prueba);

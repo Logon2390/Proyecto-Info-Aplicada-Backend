@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Backend.Models.DTOs;
+﻿using Backend.Custom;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Backend.Custom;
 
 namespace Backend.Services
 {
@@ -47,13 +43,16 @@ namespace Backend.Services
         public async Task<bool> AddBlockToUser(String documents, int ownerId)
         {
 
+            // Verifica si ya existen bloques para el ownerId
+            var existingBlocks = await GetBlocksbyOwner(ownerId);
+
             var block = new Block
             {
                 FechaMinado = DateTime.UtcNow.ToString(),
                 Prueba = 0,
                 Milisegundos = 0,
                 Documentos = documents,
-                HashPrevio = "",
+                HashPrevio = existingBlocks.Count == 0 ? new string('0', 32) : GetLastBlock(ownerId),
                 Hash = ""
             };
 
@@ -69,6 +68,11 @@ namespace Backend.Services
             };
             _relationContext.User_Block.Add(relation);
             await _relationContext.SaveChangesAsync();
+
+            //Minar el bloque y actualizar este mismo
+            block = Miner.MineBlock(block, ownerId, this);
+            _context.Blocks.Update(block);
+            await _context.SaveChangesAsync();
 
             return true;
         }
@@ -101,25 +105,26 @@ namespace Backend.Services
             return true;
         }
 
-        // Minar un bloque y devolver un true si se minó correctamente
-        public async Task<bool> MineBlock(int id)
+        //Obtener el hash del penúltimo bloque
+        public string GetLastBlock(int ownerId)
         {
-            var block = await _context.Blocks.FindAsync(id);
-
-            // Si el bloque no existe
-            if (block == null)
+            var relations = _relationContext.User_Block.ToList();
+            var blocks = _context.Blocks.ToList();
+            var lastBlock = "";
+            foreach (var relation in relations)
             {
-                return false;
+                if (relation.UserId == ownerId)
+                {
+                    foreach (var block in blocks)
+                    {
+                        if (block.Id == relation.BlockId)
+                        {
+                            lastBlock = block.Hash;
+                        }
+                    }
+                }
             }
-
-            // Minar el bloque
-            block = Miner.MineBlock(block);
-            await _context.SaveChangesAsync();
-
-            //Mostrar en consola el hash minado
-            Console.WriteLine(block.Hash);
-
-            return true;
+            return lastBlock;
         }
     }
 }
